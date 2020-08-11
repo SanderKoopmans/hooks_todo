@@ -7,23 +7,29 @@ const App = () => {
     item: 'Practise using hooks',
   });
 
-  const onSubmit = event => {
+  const handleChange = value => {
+    console.log('value in change', value);
+    setState({ ...state, id: state.length++, item: value });
+  };
+
+  const handleSubmit = event => {
     event.preventDefault();
-    console.log('onSubmit fired');
+    console.log('onSubmit fired', state);
   };
 
   return (
     <div className="App">
       <h1>Hooks todo</h1>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="todo-add">
           Add new todo item
           <input
             id="todo-add"
             name="todo-add"
-            placeholder="Add something" />
+            placeholder="Add something"
+            onChange={(event) => handleChange(event.target.value)} />
         </label>
-        <button type="submit" onClick={onSubmit}>Add item</button>
+        <button type="submit">Add item</button>
       </form>
       <h3>PLaceholder for list items</h3>
     </div>
