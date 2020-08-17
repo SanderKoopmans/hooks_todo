@@ -1,39 +1,52 @@
 import React, { useState } from 'react';
 import './App.css';
 
-const App = () => {
-  const [state, setState] = useState({
-    id: 0,
-    item: 'Practise using hooks',
-  });
+const Todo = ({ todo }) => <div className="todo">{todo.text}</div>;
 
-  const handleChange = value => {
-    console.log('value in change', value);
-    setState({ ...state, id: state.length++, item: value });
-  };
+const TodoForm = ({ addTodo }) => {
+  const [value, setValue] = useState('');
 
   const handleSubmit = event => {
     event.preventDefault();
-    console.log('onSubmit fired', state);
+    if (!value) return;
+    addTodo(value);
+    setValue('');
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        className="input"
+        value={value}
+        onChange={e => setValue(e.target.value)} />
+    </form>
+  );
+};
+
+const App = () => {
+  const [todos, setTodos] = useState([
+    { text: 'First todo' },
+  ]);
+
+  const addTodo = text => {
+    const newTodos = [...todos, { text }];
+    setTodos(newTodos);
   };
 
   return (
     <div className="App">
-      <h1>Hooks todo</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="todo-add">
-          Add new todo item
-          <input
-            id="todo-add"
-            name="todo-add"
-            placeholder="Add something"
-            onChange={(event) => handleChange(event.target.value)} />
-        </label>
-        <button type="submit">Add item</button>
-      </form>
-      <h3>PLaceholder for list items</h3>
+      <div className="todo-list">
+        <TodoForm addTodo={addTodo} />
+        {todos.map((todo, index) => (
+          <Todo 
+            key={index}
+            index={index}
+            todo={todo} />
+        ))}
+      </div>
     </div>
   );
-}
+};
 
 export default App;
