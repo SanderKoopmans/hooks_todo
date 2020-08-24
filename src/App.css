@@ -1,3 +1,15 @@
 .App {
   text-align: center;
 }
+
+.form-todo {
+  margin: 10px;
+}
+
+input {
+  margin: 0 0 0 10px;
+}
+
+.btn-submit {
+  margin: 10px 0;
+}
