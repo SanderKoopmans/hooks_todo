@@ -1,6 +1,11 @@
+body {
+  margin: 2%;
+}
+
 .App {
   text-align: center;
-  margin: 2%;
+  margin: 0 auto;
+  width: 60%;
 }
 
 .form-todo {

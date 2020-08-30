@@ -8,7 +8,7 @@ import {
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: '60%',
+    width: '75%',
     padding: '1%',
     margin: '0 auto',
   },
