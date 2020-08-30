@@ -1,15 +1,26 @@
 import React, { useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import { 
   Button,
   Input,
   InputLabel,
 } from '@material-ui/core';
 
+const useStyles = makeStyles(theme => ({
+  root: {
+    width: '60%',
+    padding: '1%',
+    margin: '0 auto',
+  },
+}));
+
 const TodoForm = ({ addTodo }) => {
   const [value, setValue] = useState('');
+  const classes = useStyles();
 
   return (
-    <form
+    <form 
+      className={classes.root}
       onSubmit={e => {
       e.preventDefault();
       addTodo(value);
@@ -17,7 +28,6 @@ const TodoForm = ({ addTodo }) => {
     }}>
 
       <InputLabel htmlFor="input">
-        Add item:
         <Input
           name="input"
           type="text"
@@ -26,6 +36,7 @@ const TodoForm = ({ addTodo }) => {
           placeholder="Add new item..." 
           inputProps={{ 'aria-label': 'description' }} />
       </InputLabel>
+      <br />
       <Button type="submit" variant="contained" color="primary">Add item</Button>
     </form>
   )
